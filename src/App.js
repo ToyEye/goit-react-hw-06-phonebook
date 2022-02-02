@@ -17,15 +17,12 @@ export default function App() {
   const dispatch = useDispatch();
 
   const addContact = ({ name, number }) => {
-    if (
-      contacts.find(contact => contact.name !== name) ||
-      contacts.length === 0
-    ) {
-      toast.success('Контакт добавлен');
-      dispatch(actions.addContact(name, number));
-    } else {
+    if (contacts.find(contact => contact.name === name)) {
       toast.error('Контакт существует!');
       return;
+    } else {
+      toast.success('Контакт добавлен');
+      dispatch(actions.addContact(name, number));
     }
   };
 
