@@ -4,7 +4,7 @@ import { Container } from './Components/Container';
 import Form from './Components/Form';
 import { Section, Title } from './Components/Section';
 import ContactList from './Components/ContactList';
-
+import { Footer } from './Components/Footer';
 import Filter from './Components/Filter';
 import toast, { Toaster } from 'react-hot-toast';
 import NotificationMessage from './Components/NotificationMessage';
@@ -17,10 +17,12 @@ export default function App() {
   const dispatch = useDispatch();
 
   const addContact = ({ name, number }) => {
-    let array = contacts.filter(contact => contact.name);
-    if (!array.includes(name)) {
+    if (
+      contacts.find(contact => contact.name !== name) ||
+      contacts.length === 0
+    ) {
       toast.success('Контакт добавлен');
-      return dispatch(actions.addContact(name, number));
+      dispatch(actions.addContact(name, number));
     } else {
       toast.error('Контакт существует!');
       return;
@@ -49,6 +51,8 @@ export default function App() {
           <ContactList />
         )}
       </Section>
+
+      <Footer />
     </Container>
   );
 }

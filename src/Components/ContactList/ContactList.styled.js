@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import Button from '../Button';
 import actions from '../../redux/contacts/contact-action';
 import { useSelector, useDispatch } from 'react-redux';
