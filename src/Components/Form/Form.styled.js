@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import toast from 'react-hot-toast';
+import { useSelector, useDispatch } from 'react-redux';
+import actions from '../../redux/contacts/contact-action';
+import { getContact } from '../../redux/contacts/contact-selector';
 import Button from '../Button';
 import { ImputEnter, InputType, InputText } from '../FormComponents';
 
@@ -15,9 +18,22 @@ const FormStyled = styled.form`
   border-radius: 5px;
 `;
 
-export default function Form({ onSubmit }) {
+export default function Form() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+
+  const contacts = useSelector(getContact);
+  const dispatch = useDispatch();
+
+  const addContact = ({ name, number }) => {
+    if (contacts.find(contact => contact.name === name)) {
+      toast.error('Контакт существует!');
+      return;
+    } else {
+      toast.success('Контакт добавлен');
+      dispatch(actions.addContact(name, number));
+    }
+  };
 
   const handleChange = evt => {
     const { name, value } = evt.target;
@@ -36,8 +52,8 @@ export default function Form({ onSubmit }) {
 
   const handleSubmit = evt => {
     evt.preventDefault();
+    addContact({ name, number });
 
-    onSubmit({ name, number });
     reset();
   };
 
@@ -80,7 +96,3 @@ export default function Form({ onSubmit }) {
     </FormStyled>
   );
 }
-
-Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};

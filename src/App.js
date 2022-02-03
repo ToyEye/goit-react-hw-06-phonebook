@@ -6,26 +6,9 @@ import { Section, Title } from './Components/Section';
 import ContactList from './Components/ContactList';
 import { Footer } from './Components/Footer';
 import Filter from './Components/Filter';
-import toast, { Toaster } from 'react-hot-toast';
-import NotificationMessage from './Components/NotificationMessage';
-import { useSelector, useDispatch } from 'react-redux';
-import actions from './redux/contacts/contact-action';
-import { getContact } from './redux/contacts/contact-selector';
+import { Toaster } from 'react-hot-toast';
 
 export default function App() {
-  const contacts = useSelector(getContact);
-  const dispatch = useDispatch();
-
-  const addContact = ({ name, number }) => {
-    if (contacts.find(contact => contact.name === name)) {
-      toast.error('Контакт существует!');
-      return;
-    } else {
-      toast.success('Контакт добавлен');
-      dispatch(actions.addContact(name, number));
-    }
-  };
-
   return (
     <Container>
       <Toaster
@@ -37,16 +20,12 @@ export default function App() {
       />
       <Section>
         <Title>Phonebook</Title>
-        <Form onSubmit={addContact} />
+        <Form />
       </Section>
       <Section>
         <Title>Contacts</Title>
         <Filter />
-        {contacts.length < 1 ? (
-          <NotificationMessage>No Contacts</NotificationMessage>
-        ) : (
-          <ContactList />
-        )}
+        <ContactList />
       </Section>
 
       <Footer />
