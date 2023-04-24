@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import toast from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
-import actions from '../../redux/contacts/contact-action';
-import { getContact } from '../../redux/contacts/contact-selector';
+import { addContact } from '../../redux/contacts/contactSlise';
 import Button from '../Button';
 import { ImputEnter, InputType, InputText } from '../FormComponents';
 
@@ -22,16 +21,17 @@ export default function Form() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(getContact);
+  const { contacts } = useSelector(store => store.contacts);
+
   const dispatch = useDispatch();
 
-  const addContact = ({ name, number }) => {
+  const addContactHandle = ({ name, number }) => {
     if (contacts.find(contact => contact.name === name)) {
       toast.error('Контакт существует!');
       return;
     } else {
       toast.success('Контакт добавлен');
-      dispatch(actions.addContact(name, number));
+      dispatch(addContact({ name, number }));
     }
   };
 
@@ -52,7 +52,7 @@ export default function Form() {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    addContact({ name, number });
+    addContactHandle({ name, number });
 
     reset();
   };

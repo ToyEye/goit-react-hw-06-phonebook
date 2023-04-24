@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { getAllContacts } from '../../redux/contacts/contact-selector';
+import filterSelector from '../../redux/contacts/selectors';
 import { ContactItem } from '../ContactItem';
 
 const ContactStyledList = styled.ul`
@@ -15,13 +15,14 @@ const ContactStyledList = styled.ul`
 `;
 
 const ContactList = () => {
-  const contacts = useSelector(getAllContacts);
+  const contacts = useSelector(filterSelector);
 
   return (
     <ContactStyledList>
-      {contacts.map(({ name, id, number }) => (
-        <ContactItem key={id} name={name} id={id} number={number} />
-      ))}
+      {contacts &&
+        contacts.map(({ name, id, number }) => (
+          <ContactItem key={id} name={name} id={id} number={number} />
+        ))}
     </ContactStyledList>
   );
 };
