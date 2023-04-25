@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../Button';
+import { deleteContactThunk } from '../../redux/contacts/operations';
 
-import { deleteContact } from '../../redux/contacts/contactSlise';
+// import { deleteContact } from '../../redux/contacts/contactSlise';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
@@ -18,14 +19,17 @@ const ContactName = styled.p`
   margin-bottom: 15px;
 `;
 
-export const ContactItem = ({ id, name, number }) => {
+export const ContactItem = ({ id, name, phone }) => {
   const dispatch = useDispatch();
   return (
     <ContactItemStyled key={id} id={id}>
       <ContactName>
-        {name} : {number}
+        {name} : {phone}
       </ContactName>
-      <Button onClick={() => dispatch(deleteContact({ id }))} type="button">
+      <Button
+        onClick={() => dispatch(deleteContactThunk({ id }))}
+        type="button"
+      >
         Delete
       </Button>
     </ContactItemStyled>
@@ -35,5 +39,5 @@ export const ContactItem = ({ id, name, number }) => {
 ContactItem.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
 };
