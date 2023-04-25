@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import toast from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { addContactThunk } from '../../redux/contacts/operations';
+import { addContact } from '../../redux/contacts/contactSlise';
 import Button from '../Button';
 import { ImputEnter, InputType, InputText } from '../FormComponents';
 
@@ -32,7 +32,7 @@ export default function Form() {
       return;
     } else {
       toast.success('Контакт добавлен');
-      dispatch(addContactThunk({ name, number }));
+      dispatch(addContact({ name, number }));
     }
   };
 
