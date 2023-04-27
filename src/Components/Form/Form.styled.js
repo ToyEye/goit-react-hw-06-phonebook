@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { nanoid } from 'nanoid';
 import styled from 'styled-components';
 import toast from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,7 +33,7 @@ export default function Form() {
       return;
     } else {
       toast.success('Контакт добавлен');
-      dispatch(addContact({ name, number }));
+      dispatch(addContact({ id: nanoid(), name, number }));
     }
   };
 
