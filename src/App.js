@@ -4,7 +4,7 @@ import { Container } from './Components/Container';
 import Form from './Components/Form';
 import { Section, Title } from './Components/Section';
 import ContactList from './Components/ContactList';
-import { Footer } from './Components/Footer';
+
 import Filter from './Components/Filter';
 import { Toaster } from 'react-hot-toast';
 
@@ -27,8 +27,6 @@ export default function App() {
         <Filter />
         <ContactList />
       </Section>
-
-      <Footer />
     </Container>
   );
 }

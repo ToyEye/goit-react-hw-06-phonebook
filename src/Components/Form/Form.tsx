@@ -1,43 +1,46 @@
-import React, { useState } from 'react';
+import React, { useState, FormEvent, ChangeEvent } from 'react';
 import { nanoid } from 'nanoid';
-import styled from 'styled-components';
+
 import toast from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { addContact } from '../../redux/contacts/contactSlise';
+
 import Button from '../Button';
-import { ImputEnter, InputType, InputText } from '../FormComponents';
 
-const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
-  width: 450px;
-  padding: 10px 15px;
-  border: 1px solid black;
-  border-radius: 5px;
-`;
+import { getContacts } from '../../redux/contacts/selectors';
 
-export default function Form() {
+import {
+  ImputEnter,
+  InputType,
+  InputText,
+  FormStyled,
+} from '../FormComponents';
+
+type TContact = {
+  name: string;
+  number: string;
+};
+
+const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const { contacts } = useSelector(store => store.contacts);
+  const { contacts } = useSelector(getContacts);
 
   const dispatch = useDispatch();
 
-  const addContactHandle = ({ name, number }) => {
-    if (contacts.find(contact => contact.name === name)) {
-      toast.error('Контакт существует!');
+  const addContactHandle = ({ name, number }: TContact) => {
+    if (contacts.find((contact: TContact) => contact.name === name)) {
+      toast.error('Contact is exist!');
       return;
     } else {
-      toast.success('Контакт добавлен');
+      toast.success('Contact added');
       dispatch(addContact({ id: nanoid(), name, number }));
     }
   };
 
-  const handleChange = evt => {
+  const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = evt.target;
 
     switch (name) {
@@ -52,7 +55,7 @@ export default function Form() {
     }
   };
 
-  const handleSubmit = evt => {
+  const handleSubmit = (evt: FormEvent) => {
     evt.preventDefault();
     addContactHandle({ name, number });
 
@@ -97,4 +100,6 @@ export default function Form() {
       <Button type="submit">Add contact</Button>
     </FormStyled>
   );
-}
+};
+
+export default Form;

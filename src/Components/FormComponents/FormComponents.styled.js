@@ -23,4 +23,15 @@ const InputText = styled.p`
   margin-bottom: 5px;
 `;
 
-export { ImputEnter, InputType, InputText };
+const FormStyled = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  width: 450px;
+  padding: 10px 15px;
+  border: 1px solid black;
+  border-radius: 5px;
+`;
+
+export { ImputEnter, InputType, InputText, FormStyled };

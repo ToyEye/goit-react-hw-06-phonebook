@@ -1,10 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import filterSelector from '../../redux/contacts/selectors';
-import { ContactItem } from '../ContactItem';
 
-const ContactStyledList = styled.ul`
+export const ContactStyledList = styled.ul`
   width: 450px;
   padding: 15px;
   margin-left: auto;
@@ -13,18 +9,3 @@ const ContactStyledList = styled.ul`
   border: 1px solid black;
   border-radius: 5px;
 `;
-
-const ContactList = () => {
-  const contacts = useSelector(filterSelector);
-
-  return (
-    <ContactStyledList>
-      {contacts &&
-        contacts.map(({ name, id, phone }) => (
-          <ContactItem key={id} name={name} id={id} phone={phone} />
-        ))}
-    </ContactStyledList>
-  );
-};
-
-export default ContactList;

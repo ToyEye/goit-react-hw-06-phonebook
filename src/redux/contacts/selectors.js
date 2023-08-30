@@ -8,3 +8,5 @@ const filterSelector = state => {
 };
 
 export default filterSelector;
+
+export const getContacts = state => state.contacts;

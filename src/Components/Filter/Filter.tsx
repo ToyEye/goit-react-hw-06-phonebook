@@ -1,4 +1,4 @@
-import React from 'react';
+import { ChangeEvent } from 'react';
 import { ImputEnter, InputType, InputText } from '../FormComponents';
 import { filterContact } from '../../redux/contacts/filterSlise';
 import { useDispatch } from 'react-redux';
@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 const Filter = () => {
   const dispatch = useDispatch();
 
-  const handler = evt => {
+  const handler = (evt: ChangeEvent<HTMLInputElement>) => {
     dispatch(filterContact(evt.target.value));
   };
 
