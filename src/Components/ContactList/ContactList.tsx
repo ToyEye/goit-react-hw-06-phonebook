@@ -9,7 +9,7 @@ import { ContactStyledList } from './ContactList.styled';
 type Props = {
   id: string;
   name: string;
-  phone: string;
+  number: string;
 };
 
 const ContactList = () => {
@@ -18,8 +18,8 @@ const ContactList = () => {
   return (
     <ContactStyledList>
       {contacts &&
-        contacts.map(({ name, id, phone }: Props) => (
-          <ContactItem key={id} name={name} id={id} phone={phone} />
+        contacts.map(({ name, id, number }: Props) => (
+          <ContactItem key={id} name={name} id={id} number={number} />
         ))}
     </ContactStyledList>
   );

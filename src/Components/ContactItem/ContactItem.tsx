@@ -8,15 +8,15 @@ import { deleteContact } from '../../redux/contacts/contactSlise';
 type Props = {
   id: string;
   name: string;
-  phone: string;
+  number: string;
 };
 
-export const ContactItem = ({ id, name, phone }: Props) => {
+export const ContactItem = ({ id, name, number }: Props) => {
   const dispatch = useDispatch();
   return (
     <ContactItemStyled key={id} id={id}>
       <ContactName>
-        {name} : {phone}
+        {name} : {number}
       </ContactName>
       <Button onClick={() => dispatch(deleteContact({ id }))} type="button">
         Delete

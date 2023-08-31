@@ -19,6 +19,7 @@ const persistConfigContacts = {
   storage,
   blacklist: ['filter'],
 };
+
 const persistedReducer = persistReducer(
   persistConfigContacts,
   contactSlice.reducer
