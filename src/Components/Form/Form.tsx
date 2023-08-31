@@ -9,6 +9,7 @@ import { addContact } from '../../redux/contacts/contactSlise';
 import Button from '../Button';
 
 import { getContacts } from '../../redux/contacts/selectors';
+import { Contact } from '../../types';
 
 import {
   ImputEnter,
@@ -17,21 +18,16 @@ import {
   FormStyled,
 } from '../FormComponents';
 
-type TContact = {
-  name: string;
-  number: string;
-};
-
 const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const { contacts } = useSelector(getContacts);
+  const contacts = useSelector(getContacts);
 
   const dispatch = useDispatch();
 
-  const addContactHandle = ({ name, number }: TContact) => {
-    if (contacts.find((contact: TContact) => contact.name === name)) {
+  const addContactHandle = ({ name, number }: Contact) => {
+    if (contacts.find((contact: Contact) => contact.name === name)) {
       toast.error('Contact is exist!');
       return;
     } else {

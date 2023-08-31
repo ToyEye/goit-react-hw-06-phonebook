@@ -5,13 +5,9 @@ import { ContactItemStyled, ContactName } from './ContactItem.styled';
 import Button from '../Button';
 import { deleteContact } from '../../redux/contacts/contactSlise';
 
-type Props = {
-  id: string;
-  name: string;
-  number: string;
-};
+import { Contact } from '../../types';
 
-export const ContactItem = ({ id, name, number }: Props) => {
+export const ContactItem = ({ id, name, number }: Contact) => {
   const dispatch = useDispatch();
   return (
     <ContactItemStyled key={id} id={id}>

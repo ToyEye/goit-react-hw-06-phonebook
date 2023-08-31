@@ -1,4 +1,6 @@
-const filterSelector = state => {
+import { RootState, Contact } from '../../types.js';
+
+const filterSelector = (state: RootState) => {
   const { contacts } = state.contacts;
   const { filter } = state.filter;
 
@@ -9,4 +11,5 @@ const filterSelector = state => {
 
 export default filterSelector;
 
-export const getContacts = state => state.contacts;
+export const getContacts = (state: RootState): Contact[] =>
+  state.contacts.contacts;

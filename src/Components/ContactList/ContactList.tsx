@@ -6,11 +6,7 @@ import { ContactItem } from '../ContactItem';
 
 import { ContactStyledList } from './ContactList.styled';
 
-type Props = {
-  id: string;
-  name: string;
-  number: string;
-};
+import { Contact } from '../../types';
 
 const ContactList = () => {
   const contacts = useSelector(filterSelector);
@@ -18,7 +14,7 @@ const ContactList = () => {
   return (
     <ContactStyledList>
       {contacts &&
-        contacts.map(({ name, id, number }: Props) => (
+        contacts.map(({ name, id, number }: Contact) => (
           <ContactItem key={id} name={name} id={id} number={number} />
         ))}
     </ContactStyledList>
